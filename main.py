@@ -14,20 +14,24 @@ screen_width =  num_of_case * case_size
 screen_height = num_of_case * case_size
 screen = pygame.display.set_mode((screen_width, screen_height))
 
-#initialize variable for the creation
-move_stack = []
-maze_data = []
-for i in range(0, num_of_case):
-    line = []
+def start():
+    #initialize variable for the creation
+    move_stack = []
+    maze_data = []
     for i in range(0, num_of_case):
-        line.append(0)
-    print(len(line))
-    maze_data.append(line)
-maze_data[1][1] = 1
+        line = []
+        for i in range(0, num_of_case):
+            line.append(0)
+        maze_data.append(line)
+    maze_data[1][1] = 1
+    maze_data[1][0] = 1
+    maze_data[num_of_case - 2][num_of_case - 1] = 1
 
-#initialize position
-x = 1
-y = 1
+    #initialize position
+    x = 1
+    y = 1
+    return x, y, maze_data, move_stack
+x, y, maze_data, move_stack = start()
 
 def move(x, y, maze_data, move_stack):
     possibility = []
@@ -44,7 +48,6 @@ def move(x, y, maze_data, move_stack):
             possibility.append("south")
 
     if possibility:
-        response = True
         move = random.choice(possibility)
         if move == "west":
             maze_data[y][x-1] = 1
@@ -64,12 +67,13 @@ def move(x, y, maze_data, move_stack):
             y += 2
         move_stack.append((x, y))
     else:
-        response = False
         if move_stack:
             x, y = move_stack.pop()
-        else:print("FINISH")
+        else:
+            if pygame.key.get_pressed()[pygame.K_RETURN]:
+                x, y, maze_data, move_stack = start()
 
-    return x, y, maze_data, move_stack, response
+    return x, y, maze_data, move_stack
 
 def draw_maze(maze_data, case_size):
     line = 0
@@ -84,16 +88,16 @@ def draw_maze(maze_data, case_size):
 run = True
 while run:
     #fps
-    clock.tick(fps)
+    # clock.tick(fps)
 
     #draw background
     pygame.draw.rect(screen, (0, 0, 0), (0, 0, screen_width, screen_height))
     #move
-    x, y, maze_data, move_stack, response = move(x, y, maze_data, move_stack)
+    x, y, maze_data, move_stack = move(x, y, maze_data, move_stack)
     #draw maze
     draw_maze(maze_data, case_size)
     #draw x and y
-    pygame.draw.rect(screen, (255, 0, 0), (x * case_size, y * case_size, case_size, case_size))
+    # pygame.draw.rect(screen, (255, 0, 0), (x * case_size, y * case_size, case_size, case_size))
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
