@@ -16,8 +16,8 @@ class MazeCreator():
                 line.append(0)
             self.maze_data.append(line)
         self.maze_data[1][1] = 1
-        self.maze_data[1][0] = 1
-        self.maze_data[self.num_of_case - 2][self.num_of_case - 1] = 1
+        self.maze_data[1][0] = 2
+        self.maze_data[self.num_of_case - 2][self.num_of_case - 1] = 2
         #initialize position
         self.x = 1
         self.y = 1
