@@ -68,4 +68,4 @@ class MazeCreator():
                     self.x, self.y = self.move_stack.pop()
                 else:
                     load_maze = False
-        return self.maze_data
+        return self.maze_data, (self.num_of_case - 2,self.num_of_case - 1)

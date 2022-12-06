@@ -7,7 +7,7 @@ clock = pygame.time.Clock()
 fps = 60
 
 #case of the screen
-num_of_case = 51
+num_of_case = 41
 case_size = 15
 
 #initialize screen
@@ -17,7 +17,7 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 
 #create maze
 maze_creator = maze_creator_py.MazeCreator()
-maze_data = maze_creator.create_maze(num_of_case, case_size)
+maze_data, arrivate = maze_creator.create_maze(num_of_case, case_size)
 
 def draw_maze(maze_data, case_size):
     line = 0
@@ -27,12 +27,12 @@ def draw_maze(maze_data, case_size):
             if row_case == 1:
                 pygame.draw.rect(screen, (255, 255, 255), (row * case_size, line * case_size, case_size, case_size))
             if row_case == 2:
-                pygame.draw.rect(screen, (0, 255, 0), (row * case_size, line * case_size, case_size, case_size))
+                pygame.draw.rect(screen, (180, 180, 180), (row * case_size, line * case_size, case_size, case_size))
             row += 1
         line += 1
 
 #initialize player
-player = player_py.Player(0, 1, num_of_case, num_of_case, maze_data, case_size, screen)
+player = player_py.Player(0, 1, arrivate, maze_data, case_size, screen)
 
 run = True
 while run:
