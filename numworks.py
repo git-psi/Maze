@@ -1,3 +1,18 @@
+"""
+Réalisé par -psi-
+07/12/2022
+Big ub à la classe des 2nd3 de Champollion
+Ce programme est un générateur de labyrinthe qui permet au passage d'y jouer
+Bonne chance
+
+Le code esiste aussi pour une version PC
+Il est bien sur plus complet avec des animation :)
+https://github.com/git-psi/Maze
+
+La version numwork se trouve ici:
+https://my.numworks.com/python/perdu-felix/maze
+"""
+
 import random
 import kandinsky
 import time
@@ -109,6 +124,7 @@ kandinsky.fill_rect(0, 0, 320, 230, (0, 0, 0))
 
 def draw_animation(color, sleep_time):
     for i in range(0, 31):
+        if color == (0,0,0): kandinsky.draw_string("by -psi-", 235, 200, (255-255//31*i, 255-255//31*i, 255-255//31*i))
         x = 65
         kandinsky.fill_rect(x, 130-i*133//100, 10, 2, color)
         kandinsky.fill_rect(x+10, 100+i//3, 10, 1, color)
@@ -168,4 +184,4 @@ while True:
         elif ion.keydown(ion.KEY_UP) and maze_data[y//case_size - 1][x//case_size]: move_y -= case_size
         elif ion.keydown(ion.KEY_DOWN) and maze_data[y//case_size + 1][x//case_size]: move_y += case_size
     x, y, move_x, move_y = player_update(x, y, move_x, move_y)
-    time.sleep(0.005)
+    time.sleep(0.01)
