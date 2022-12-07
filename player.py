@@ -24,7 +24,7 @@ class Player():
         self.change_color()
         self.animation_fun()
         if (self.y//self.case_size, self.x//self.case_size) == self.arrivate:
-            print(1111)
+            return True
         elif not self.move_x and not self.move_y:
             if not self.test_key():
                 self.velocity = 0
